@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>See</title>
+</head>
+
+<body>
+    <form>
+        <input type="button" value="Go back!" onclick="history.back()">
+    </form>
+</body>
+<audio id="seeSound" preload="auto">
+    <source src="sounds/seesound.mp3" />
+</audio>
+<style>
+    body {
+        background-image: url('pictures/see.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+</style>
+<script>
+    document.getElementById("seeSound").play();
+
+</script>
+
+</html>

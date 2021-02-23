@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room</title>
+</head>
+
+<body>
+    <img class="ghost" src="pictures/ghost.png" alt="a ghost">
+    <form>
+        <input type="button" value="Go back!" onclick="history.back()">
+    </form>
+</body>
+<audio id="roomGhost">
+    <source src="sounds/Azghost.mp3" />
+</audio>
+<style>
+    body {
+        background-image: url('pictures/room.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
+
+    .ghost {
+        background-color: transparent;
+        margin: 0;
+        position: absolute;
+        bottom: 0px;
+        top: 50%;
+        left: 50%;
+        transition: transform 1s;
+        -webkit-animation: animate 5s ease-in;
+        animation: animate 5s ease-in;
+    }
+
+    @-webkit-keyframes animate {
+        from {
+            width: 160px;
+            height: 400px;
+        }
+
+        to {
+            width: 200px;
+            height: 500px;
+        }
+    }
+
+
+    .ghost:hover {
+        background: red;
+    }
+</style>
+<script>
+    document.getElementById("roomGhost").play();
+
+    var clicks = 0;
+
+    function attackGhost(){
+       if(clicks = 10){
+        var ghostElement = document.getElementsByClassName("Ghost");
+        ghostElement.style.display = 'none';
+        
+       } 
+
+       clicks++;
+
+    }
+
+    function circle() {
+        var width = 10,
+            height = 10,
+            offsetX = 100,
+            offsetY = 100,
+            x = Math.cos(new Date()) * width + offsetX;
+        y = Math.sin(new Date()) * height + offsetY;
+
+        //Do whatever you want here with the coordinates.
+        document.getElementsByClassName("ghost")[0].style.left = x;
+        document.getElementsByClassName("ghost")[0].style.top = y;
+
+        setTimeout(circle, 50);
+    }
+</script>
+
+</html>
