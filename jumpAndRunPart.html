@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="scripts/script.js"></script>
+    <link rel="stylesheet" type="text/css" href="jumpAndRun.css">
+    <title>Lets go!</title>
+</head>
+
+<body>
+    <div class="game">
+        <progress class="progress" id="health" value="100" max="100"></progress>
+        <div class="points">
+            <h1 class="pointsValue">0</h1>
+        </div>
+        <div class="character"></div>
+        <div class="campfire"></div>
+    </div>
+</body>
+<audio id="jumpMusic" preload="auto">
+    <source src="sounds/runmusic.mp3" />
+</audio>
+<script>
+    document.getElementById("jumpMusic").play();
+</script>
+
+</html>

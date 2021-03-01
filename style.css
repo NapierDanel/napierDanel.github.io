@@ -1,38 +1,42 @@
-* + * {
-    margin-top: 1rem;
-  }
-  
-  h1{
-      color: crimson;
-      font-family: 'Creepster', cursive;
-      text-align: center;
-      font-size: 4em;
-      -webkit-animation: horror-animation 5s infinite;
-      -moz-animation: horror-animation 5s infinite;
-      -o-animation: horror-animation 5s infinite;
-      animation: horror-animation 5s infinite;
-  }
-  
-  a{
-      color: #06b400;
-      text-align: center;
-  }
-  
-  .module {
-    border: 0.5rem solid #06b400;
-    padding: 1rem;
-    background: black;
-  }
-  .module > div {
-    padding: 1rem;
-    background: red;
-  }
+*+* {
+  margin-top: 1rem;
+}
 
-  
-  body {
-    background: black;
-    margin: 0;
-    padding: 1rem;
+@keyframes para {
+  100% {
+    background-position: -5000px 20%, -800px 95%, 500px 50%, 1000px 100%, 400px 0;
   }
+}
 
-  
+h1 {
+  color: crimson;
+  font-family: 'Creepster', cursive;
+  text-align: center;
+  font-size: 4em;
+  -webkit-animation: horror-animation 5s infinite;
+  -moz-animation: horror-animation 5s infinite;
+  -o-animation: horror-animation 5s infinite;
+  animation: horror-animation 5s infinite;
+}
+
+a {
+  color: #06b400;
+  text-align: center;
+}
+
+.module {
+  border: 0.5rem solid #06b400;
+  padding: 1rem;
+  background: black;
+}
+
+.module>div {
+  padding: 1rem;
+  background: red;
+}
+
+body {
+  background: black;
+  margin: 0;
+  padding: 1rem;
+}
