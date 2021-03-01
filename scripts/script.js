@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
 
-        if(points >= 2000){
+        if(points >= 500){
             window.location.replace('forest.html')
         }
 
