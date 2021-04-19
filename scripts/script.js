@@ -1,253 +1,170 @@
+// Analytics
+var hitsInGame = 0
+var gameOver = 0
+var health = 100
+var time = 0
+var roomsEntered = 0
+
+var startDate;
+var endDate;
+
+
+
 var c = 0;
 var t;
-var timer_is_on = 0;
+var timer_is_on = false;
 var time = 0;
 
-function timedCount() {
-    c = c + 1;
-    t = setTimeout(timedCount, 1000);
+
+
+// Player -----------------------------------------------------------------
+
+function generatePlayer(inputName) {
+    player = {
+        "name": inputName,
+        "lifes": 100,
+        "tools": [],
+        
+
+    }
+}
+
+// Cookies ----------------------------------------------------------------
+
+
+
+// Ghosts
+var roomGhost =
+{
+    "id": 0,
+    "name": "RoomGhost",
+    "path": "pictures/ghost.png",
+    "spookLevel": 5,
+    "specialAttacks": [
+        "zoom",
+        "scream",
+        "whiteFist"
+    ],
+    "enviroments": [
+        "room"
+    ]
+};
+
+// ISS Api ----------------------------------------------------------------
+
+
+async function getISS() {
+
+    const issUrl = ("https://api.wheretheiss.at/v1/satellites/25544");
+    const response = await fetch(issUrl);
+    const data = await response.json();
+    console.log(data);
+
+    // get lat lon into const variables
+    const { latitude, longitude } = data;
+    console.log(latitude);
+    console.log(longitude);
+}
+
+
+//getISS();
+
+// SpaceX Api ----------------------------------------------------------------
+
+
+async function getAllSpaceXMissions() {
+
+    const spacexUrl = "https://api.spacexdata.com/v3/missions";
+    const response = await fetch(spacexUrl);
+    const data = await response.json();
+    console.log(data);
+
+    // get lat lon into const variables
+    const { mission_name, payload_ids } = data;
+    console.log(mission_name);
+    console.log(payload_ids);
+}
+
+
+//getAllSpaceXMissions();
+
+// Ghost Api ----------------------------------------------------------------
+
+
+let ghostApiUrl = "https://git.heroku.com/ghost-api-game.git";
+
+
+// async function getGhosts() {
+//     let response = await fetch(ghostApiUrl);
+//     let ghostsJsonResponse = await response.json();
+//     return ghostsJsonResponse;
+// }
+
+// getGhosts().then(data => console.log(data))
+//     .catch(err => {
+//         console.log("Error :0");
+//         console.err(err);
+//     });
+
+
+console.log("Ghosts");
+console.group();
+console.log("Level 2");
+console.group();
+console.log("Level 3");
+console.warn("More of level 3");
+console.groupEnd();
+console.log("Back to level 2");
+console.groupEnd();
+console.log("Back to the outer level")
+
+
+
+
+
+document.cookie = "user, initTime";
+
+
+var x = document.cookie;
+
+console.log(x);
+
+// Start new Game and go to index
+function startGame() {
+    let inputName = document.getElementById("nameInput").value;
+        if(inputName === ""){
+            document.getElementById("nameInput").style.borderColor ="red";
+            return
+        }
+        localStorage.setItem("username", inputName)
+        location.href='index.html'
+        startCount();
+        setItems();
+
+}
+
+function setItems() {
+    // Init Statistics
+    localStorage.setItem("startDate", startDate);
+    localStorage.setItem("lifes", 100);
+    localStorage.setItem("deaths", 0);
+    localStorage.setItem("jumps", 0);
+    localStorage.setItem("hits", 0);
+    localStorage.setItem("beats", 0);
+
+    console.log(localStorage.getItem("startDate"));
+    console.log(localStorage.getItem("lifes"));
+
 }
 
 function startCount() {
-    if (!timer_is_on) {
-        timer_is_on = 1;
-        timedCount();
-    }
+    timer_is_on = true;
+    startDate = new Date();
 }
 
-function stopCount() {
-    clearTimeout(t);
-    timer_is_on = 0;
-}
+// var elements = [];
+//     elements[0] = {name: "Alpha" , score: "454"}, 
+//     elements[1] = {name: "Beta"  , score: "22223"   }, 
+//     elements[2] = {name: "Gamma" , score: "2324"   };
 
-
-// Jump and Run Part
-
-// When Dom loaded
-document.addEventListener('DOMContentLoaded', () => {
-
-    // Lifes
-    let health = document.getElementById("health")
-
-    const lifeObjects = document.querySelector('lifes')
-    var lifes = 5
-
-    const character = document.querySelector('.character')
-    const campfire = document.querySelector('.campfire')
-    const game = document.querySelector('.game')
-    const pointsValue = document.querySelector('.pointsValue')
-
-    let isGameOver = false
-    let points = 0
-
-
-    let bottom = 0
-    let gravity = 0.9
-    let isJumping = false
-
-    let isGoingLeft = false
-    let isGoingRight = false
-
-    let left = 0
-    let right = 0
-
-
-    var width
-    var height
-
-    let fireRight = window.innerWidth;
-
-    let rightTimerId
-    let leftTimerId
-
-    var resize = function () {
-        width = window.innerWidth * 2
-        height = window.innerHeight * 2
-    }
-
-    window.onresize = resize
-    resize()
-
-    let campfireSlide = setInterval(function () {
-        campfire.style.bottom = fireRight + 'px'
-    })
-
-    function jump() {
-        if (isJumping) return
-
-        if (isGoingRight) {
-            character.classList.add('character-jump-right')
-        } else if (isGoingLeft) {
-            character.classList.add('character-jump-left')
-        } else {
-            character.classList.add('character-jump-right')
-        }
-
-
-        let timerUpId = setInterval(function () {
-
-            if (bottom > 250) {
-                clearInterval(timerUpId)
-                let timerDownId = setInterval(function () {
-                    if (bottom <= 0) {
-                        clearInterval(timerDownId)
-                        isJumping = false
-                        character.classList.remove('character-jump-right')
-                        character.classList.remove('character-jump-left')
-                        character.classList.add('character')
-                    }
-                    bottom -= 5
-                    character.style.bottom = bottom + 'px'
-                }, 20)
-
-            }
-            isJumping = true
-            bottom += 30
-            character.style.bottom = bottom * 0.9 + 'px'
-
-            if (isGoingLeft) {
-                character.classList.add('character-slide-left')
-            } else {
-                character.classList.add('character-slide-right')
-            }
-        }, 20)
-
-    }
-
-    function slideLeft() {
-
-        if (isGoingLeft) return
-
-        if (isGoingRight) {
-            clearInterval(rightTimerId)
-            isGoingRight = false
-            character.classList.add('character-slide-left')
-        }
-        if (isJumping) {
-            character.classList.remove('character-jump-right')
-            character.classList.add('character-jump-left')
-        } else {
-            character.classList.remove('character-slide-right')
-            character.classList.add('character-slide-left')
-        }
-        isGoingLeft = true
-
-        leftTimerId = setInterval(function () {
-            left -= 5
-            if (left < 0) left = 0
-            character.style.left = left + 'px'
-
-        }, 20)
-
-
-    }
-
-    function slideRight() {
-
-        if (isGoingRight) return
-
-        if (isGoingLeft) {
-            clearInterval(leftTimerId)
-            isGoingLeft = false
-            character.classList.add('character-slide-right')
-        }
-
-        if (isJumping) {
-            character.classList.remove('character-jump-left')
-            character.classList.add('character-jump-right')
-        } else {
-            character.classList.remove('character-slide-left')
-            character.classList.add('character-slide-right')
-        }
-
-        isGoingRight = true
-
-        rightTimerId = setInterval(function () {
-            left += 5
-            if (left >= (window.innerWidth - 150)) {
-                left = window.innerWidth - 150
-            }
-            character.style.left = left + 'px'
-        }, 20)
-
-
-    }
-
-    function generateObstacles() {
-       
-        let hit = false
-        let randomTime = Math.random() * 4000
-        let obstaclePosition = window.innerWidth - 120
-        const obstacle = document.createElement('div')
-        obstacle.classList.add('obstacle')
-
-        if (health.value != 0) obstacle.classList.add('obstacle')
-        game.appendChild(obstacle)
-        obstacle.style.left = obstaclePosition + 'px'
-
-        let timerId = setInterval(function () {
-            if (obstaclePosition > left && obstaclePosition < (left + 100) && bottom < 100) {
-                if (health.value === 10) {
-                    clearInterval(timerId)
-                    alert.innerHTML = 'Game Over'
-                    isGameOver = true
-                    hit = true
-                    //remove all childs
-                    while (game.firstChild) {
-                        game.removeChild(game.lastChild)
-                    }
-                } else {
-                    hit = true
-                    health.value -= 10;
-                    clearInterval(timerId)
-                    console.log('hit! ' + health.value)
-                    game.removeChild(obstacle)
-                }
-            }
-            obstaclePosition -= 10
-            obstacle.style.left = obstaclePosition + 'px'
-            
-        }, 20)
-
-        if (!isGameOver) {
-            setTimeout(generateObstacles, randomTime)
-          
-        } else {
-            let alterString = 'Game over \nYou reached ' + points + ' points'
-            if (window.confirm(alterString)) {
-                window.location.href = 'index.html';
-            };
-        }
-
-        if(points >= 500){
-            window.location.replace('forest.html')
-        }
-
-        if(!hit){
-            points += 10
-            pointsValue.textContent = points
-        }
-       
-    }
-
-    // assign function jump to keycodes
-    function control(e) {
-        // Up is pressed
-        if (e.keyCode == 38) {
-            jump()
-        }
-        // Left is pressed
-        else if (e.keyCode == 37) {
-            slideLeft()
-        }
-        // Left is pressed
-        else if (e.keyCode == 39) {
-            slideRight()
-        }
-    }
-
-    generateObstacles()
-    document.addEventListener('keydown', control)
-
-
-})
+// localStorage.setItem("highScores", JSON.stringify(elements))

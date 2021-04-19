@@ -1,0 +1,47 @@
+body {
+    background-image: url('../pictures/see.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    padding: 0;
+    margin: 0;
+
+}
+
+*, *:before ,*:after{
+    box-sizing:  inherit;
+}
+
+.fish {
+    background-image: url('../pictures/Doree_fish_18th_century.svg') bottom no-repeat center;
+    background-size: 60%;
+    position: absolute;
+    top: 100px;
+    width: 200px;
+    height: 100px;
+    transition: all 0.4s;
+}
+
+.waterpoint.up .fish{
+    top: 0;
+
+}
+
+
+.grid {
+	width: 606px;
+	height: 606px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.square {
+	height: 200px;
+	width: 200px;
+	border: solid black 1px;
+}
+
+.mole {
+	background-image: url("../pictures/fish_PNG25164.png");
+	background-size: cover;
+}

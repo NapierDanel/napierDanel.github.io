@@ -1,26 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Introduction</title>
-    <link rel="stylesheet" href="style.css">
+    <script src="scripts/script.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/intro.css">
 </head>
 
 <body>
-    <h1>Welcome to the creazy horror Game</h1>
+    <h1>Welcome to the creazy horror science Game</h1>
     <a>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy ei
         rmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-        At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
-        no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-        consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
-        et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo
-        duo dolores et ea rebum. Stet clita kasd gubergren, no
+        At vero eos et accuasd gubergren, no
         sea takimata sanctus est Lorem ipsum dolor sit amet.</a>
     <a id="txt"></a>
     <div class="apiTest"></div>
+    <div id="flexItems">
+
+        <div class="key" type="button">
+            <span class="text">←</span>
+            <div class="angle-shadow left-top top-section"></div>
+            <div class="angle-shadow right-top top-section"></div>
+            <div class="angle-shadow left-bottom bottom-section"></div>
+            <div class="angle-shadow right-bottom bottom-section"></div>
+        </div>
+
+        <div class="key" type="button">
+            <span class="text">↑</span>
+            <div class="angle-shadow left-top top-section"></div>
+            <div class="angle-shadow right-top top-section"></div>
+            <div class="angle-shadow left-bottom bottom-section"></div>
+            <div class="angle-shadow right-bottom bottom-section"></div>
+        </div>
+
+        <div class="key" type="button">
+            <span class="text">→</span>
+            <div class="angle-shadow left-top top-section"></div>
+            <div class="angle-shadow right-top top-section"></div>
+            <div class="angle-shadow left-bottom bottom-section"></div>
+            <div class="angle-shadow right-bottom bottom-section"></div>
+        </div>
+
+    </div>
+    <div id="flexItems">
+        <h3>slide left</h3>
+        <h3>jump</h3>
+        <h3>slide right</h3>
+    </div>
+    <input id="nameInput" type="text" value="" placeholder="Enter your name" color="red" style=" display: block;
+    margin-right: auto; text: 24px;
+    margin-left: auto; align-self: center;text-align: center;   width: 98%; height: 50px;
+">
     <div class="module">
-        <div onclick="location.href='index.html';">Start</div>
+        <div onclick="startGame()">Start</div>
     </div>
 </body>
 

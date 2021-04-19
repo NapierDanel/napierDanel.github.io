@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toilet</title>
+    <link rel="stylesheet" href="styles/toilet.css">
+
+</head>
+
+<body>
+    <form>
+        <input type="button" value="Go back!" onclick="history.back()">
+    </form>
+    <h1 id="raspHintText">Find a way</h1>
+
+    <div id="container">
+   <img src="pictures/toilet.jpg" alt="kitchen" width="1200" height="700" usemap="#toiletMap" id="toiletPicture"
+        draggable="true">
+    <map name="toiletMap">
+        <area shape="rect" coords="587,520,656,579" alt="toiletSecret" onclick="foundDoor(event)">
+       
+
+    <iframe id="iFrameRasp" onclick="showRaspText()" class="rasp" height="200" width="400"
+        src="/pictures/rasp.svg" draggable="true"></iframe>
+    </div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" type="text/javascript"></script>
+
+<script src="scripts/toilet.js"></script>
+
+</html>

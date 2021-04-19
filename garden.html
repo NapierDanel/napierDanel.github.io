@@ -11,6 +11,7 @@
     <form>
         <input class="backButton" type="button" value="Go back!" onclick="history.back()">
     </form>
+    <div id="crosshair" onclick="onCrossHairClicked()"></div>
 </body>
 <audio id="trimmer">
     <source src="sounds/lawnmowel.mp3" />
@@ -19,6 +20,11 @@
     <source src="sounds/creazySmile.mp3" />
 </audio>
 <style>
+    #crosshair{
+        position: relative;
+        left: 70%;
+
+    }
     body {
         background-image: url('pictures/garden.jpeg');
         background-repeat: no-repeat;
@@ -41,5 +47,6 @@
     document.getElementById("trimmer").play();
     document.getElementById("smile").play();
 </script>
+<script src="/scripts/garden.js"></script>
 
 </html>

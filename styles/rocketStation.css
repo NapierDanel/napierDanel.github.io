@@ -1,0 +1,64 @@
+html {
+    background-color: black;
+}
+
+h1 {
+    color: red;
+}
+
+#userTime {
+    color: greenyellow;
+}
+
+#userDeaths {
+    color: greenyellow;
+}
+
+#userLifes {
+    color: greenyellow;
+}
+
+#userJumps {
+    color: greenyellow;
+}
+
+#userHits {
+    color: greenyellow;
+}
+
+#lottieRocket {
+    float: left;
+}
+
+#highScores {
+    float: center;
+}
+
+#finalScore {
+    float: center;
+}
+
+#highScoreList {
+    color: greenyellow;
+    float: right;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 4rem;
+}
+
+.high-score {
+    font-size: 24pt;
+    list-style: none;
+    color: greenyellow;
+}
+
+.high-score:hover {
+    -webkit-transform: scale(1.2);
+}
+
+a {
+    border: 1px solid;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 24pt
+}

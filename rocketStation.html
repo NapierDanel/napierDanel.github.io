@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rocket Station</title>
+    <link rel="stylesheet" href="/styles/rocketStation.css">
+</head>
+
+<body>
+    <div id=container>
+        <lottie-player id="lottieRocket" src="https://assets9.lottiefiles.com/packages/lf20_j8t8fjxs.json"
+            background="black" speed="0.4" style="width: 66%; height: 40%;" loop autoplay></lottie-player>
+        <h1 id="congrationText">You made it :)</h1>
+        <h1 id="userTime"></h1>
+        <h1 id="userDeaths"></h1>
+        <h1 id="userLifes"></h1>
+        <h1 id="userJumps"></h1>
+        <h1 id="userHits"></h1>
+        <h1 id="highScores">High Scores</h1>
+        <ul id="finalScore"></ul>
+        <ul id="highScoresList"></ul>
+        <a class="btn" onClick="startGame();"; href="intro.html">Start again</a>
+    </div>
+</body>
+<script src="scripts/rocketStation.js"></script>
+<script src="scripts/lottie.js"></script>
+<script src="scripts/script.js"></script>
+</html>

@@ -1,0 +1,41 @@
+body {
+    background-image: url('/pictures/room.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.ghost {
+    background-color: transparent;
+    margin: 0;
+    position: absolute;
+    bottom: 0px;
+    top: 50%;
+    left: 50%;
+    transition: transform 1s;
+    -webkit-animation: animate 5s ease-in;
+    animation: animate 5s ease-in;
+}
+
+body { cursor: crosshair; }
+
+
+@-webkit-keyframes animate {
+    from {
+        width: 160px;
+        height: 400px;
+    }
+
+    to {
+        width: 200px;
+        height: 500px;
+    }
+}
+
+progress[value] {
+    background: transparent;
+    width: 250px;
+    height: 20px;
+    margin: 10px;
+  }
+  
