@@ -71,6 +71,10 @@ async function getISS() {
 
 // SpaceX Api ----------------------------------------------------------------
 
+    const issUrl = ("https://api.wheretheiss.at/v1/satellites/25544");
+    const response = await fetch(issUrl);
+    const data = await response.json();
+    console.log(data);
 
 async function getAllSpaceXMissions() {
 
@@ -144,8 +148,6 @@ function startGame() {
     startCount();
     setItems();
     location.href = 'intro.html'
-
-
 }
 
 function setItems() {

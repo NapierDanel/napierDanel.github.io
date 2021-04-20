@@ -1,5 +1,3 @@
-
-
 invert()
 
 // create a negative Effect

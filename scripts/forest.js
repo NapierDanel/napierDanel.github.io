@@ -1,13 +1,5 @@
-
-
 function addElement() {
-
-
-
    document.body.style.background = backgroundImage
-
-   console.log("Yeha")
-
 }
 
 document.body.onload = addElement;

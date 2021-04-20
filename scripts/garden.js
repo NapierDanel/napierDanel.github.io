@@ -5,7 +5,7 @@ var haveSecretKey = localStorage.getItem("secretKey");
 console.log("have secret key: " + haveSecretKey);
 
 // Show the crosshair to the rocketStation if the user got the secret key
-if (haveSecretKey) {
+if (!haveSecretKey) {
     console.log("True")
     var crosshairImage = document.createElement("img");
     crosshairImage.src = '../pictures/redCircle.png';
