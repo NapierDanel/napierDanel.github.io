@@ -1,0 +1,30 @@
+#container{
+    position: relative;
+}
+#iFrameRasp{
+    position: absolute;
+    left: 1100px;
+
+}
+html{
+    background-color: black;
+    cursor: url("https://w7.pngwing.com/pngs/522/312/png-transparent-rasp-file-hand-tool-wood-sign-miscellaneous-wood-metal.png"), auto;
+}
+
+.rasp{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    border: 10%;
+    left: 93%;
+}
+
+h1{
+    color: red;
+    
+}
+
+
+#secretDoor{
+    color: red;
+}

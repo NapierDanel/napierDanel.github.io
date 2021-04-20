@@ -11,6 +11,10 @@
     <form>
         <input class="backButton" type="button" value="Go back!" onclick="history.back()">
     </form>
+    <progress class="progress" id="health" id="health" value="100" max="100"></progress>
+    <div id="crosshair" onclick="onCrossHairClicked()"></div>
+    <div id="x"></div>
+    <img src="#" class="icon" hidden="hidden" id="template" />
 </body>
 <audio id="trimmer">
     <source src="sounds/lawnmowel.mp3" />
@@ -19,6 +23,12 @@
     <source src="sounds/creazySmile.mp3" />
 </audio>
 <style>
+    #crosshair {
+        position: relative;
+        left: 70%;
+
+    }
+
     body {
         background-image: url('pictures/garden.jpeg');
         background-repeat: no-repeat;
@@ -36,10 +46,23 @@
     .backButton:hover {
         box-shadow: 0 0 10px 0 #e74c3c inset, 0 0 10px 4px #e74c3c;
     }
-</style>
-<script>
-    document.getElementById("trimmer").play();
-    document.getElementById("smile").play();
-</script>
 
+    #x {
+        height: 400px;
+        position: relative;
+    }
+
+    #x .icon {
+        position: absolute;
+        z-index: 2;
+    }
+
+    progress[value] {
+        background: transparent;
+        width: 250px;
+        height: 20px;
+        margin: 10px;
+    }
+</style>
+<script src="/scripts/garden.js"></script>
 </html>
