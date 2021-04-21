@@ -3,32 +3,29 @@
 // When Dom loaded
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Lifes
-    let health = document.getElementById("health")
-    const character = document.querySelector('.character')
-    const campfire = document.querySelector('.campfire')
-    const game = document.querySelector('.game')
-    const pointsValue = document.querySelector('.pointsValue')
+    // Set Health to localStorage health
+    let health = document.getElementById("health");
+    health.value = localStorage.getItem("health");
+
+    // get the objects from Document
+    const character = document.querySelector('.character');
+    const campfire = document.querySelector('.campfire');
+    const game = document.querySelector('.game');
+    const pointsValue = document.querySelector('.pointsValue');
+
 
     let isGameOver = false
     let points = 0
-
-
     let bottom = 0
     let gravity = 0.9
     let isJumping = false
-
     let isGoingLeft = false
     let isGoingRight = false
-
     let left = 0
     let right = 0
-
     let fireRight = window.innerWidth;
-
     let rightTimerId
     let leftTimerId
-
     // Statistic
     var statisticHits = 0
     var statisticJumps = 0
@@ -47,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     function jump() {
-
         var localStorageJumps = parseInt(localStorage.getItem("jumps"));
         localStorageJumps += 1;
         localStorage.removeItem("jumps");
@@ -66,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         let timerUpId = setInterval(function () {
-
             if (bottom > 250) {
                 clearInterval(timerUpId)
                 let timerDownId = setInterval(function () {
@@ -124,15 +119,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function slideRight() {
-
         if (isGoingRight) return
-
         if (isGoingLeft) {
             clearInterval(leftTimerId)
             isGoingLeft = false
             character.classList.add('character-slide-right')
         }
-
         if (isJumping) {
             character.classList.remove('character-jump-left')
             character.classList.add('character-jump-right')
@@ -140,9 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
             character.classList.remove('character-slide-left')
             character.classList.add('character-slide-right')
         }
-
         isGoingRight = true
-
         rightTimerId = setInterval(function () {
             left += 5
             if (left >= (window.innerWidth - 150)) {
@@ -150,10 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             character.style.left = left + 'px'
         }, 20)
-
-
     }
 
+    // generrate Obstacles and if the player hits them dec health
     function generateObstacles() {
 
         let hit = false
@@ -173,12 +162,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert.innerHTML = 'Game Over'
                     isGameOver = true
                     hit = true
-                    statisticHits++
                     var localStorageDeaths = parseInt(localStorage.getItem("deaths"));
                     localStorageDeaths += 1;
                     localStorage.removeItem("deaths");
                     localStorage.setItem("deaths", localStorageDeaths);
-                    isGameOver = true;
                     //remove all childs
                     while (game.firstChild) {
                         game.removeChild(game.lastChild)
@@ -187,6 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     statisticHits++
                     hit = true
                     health.value -= 10;
+                    var localStoragehealth = parseInt(localStorage.getItem("health"));
+                    localStorage.removeItem("health")
+                    localStoragehealth -= 10;
+                    localStorage.setItem("health", localStoragehealth);
                     clearInterval(timerId)
                     console.log('hit! ' + health.value)
                     game.removeChild(obstacle)
@@ -199,16 +190,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!isGameOver) {
             setTimeout(generateObstacles, randomTime)
-
         } else {
-            gameOver++
-            statisticDeaths++
             var jumps = parseInt(localStorage.getItem('jumps'))
             localStorage.getItem("jumps", jumps += statisticJumps)
-            let alterString = 'Game over \nYou reached ' + points + ' points'
+            let alterString = confirm('Game over \nYou reached ' + points + ' points')
             if (window.confirm(alterString)) {
-                window.location.href = 'index.html';
+                window.location.href = 'intro.html';
             };
+            
         }
 
         if (points >= 200) {

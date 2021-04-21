@@ -1,11 +1,12 @@
 let health = document.getElementById("health")
+health.value = localStorage.getItem("health");
 document.getElementById("trimmer").play();
 document.getElementById("smile").play();
 var haveSecretKey = localStorage.getItem("secretKey");
 console.log("have secret key: " + haveSecretKey);
 
 // Show the crosshair to the rocketStation if the user got the secret key
-if (!haveSecretKey) {
+if (haveSecretKey) {
     console.log("True")
     var crosshairImage = document.createElement("img");
     crosshairImage.src = '../pictures/redCircle.png';
@@ -102,6 +103,8 @@ if (!haveSecretKey) {
         document.getElementById('medikitImg').style.marginRight = "auto";
         document.getElementById('medikitImg').style.bottom = "500px"
         document.getElementById('medikitImg').onclick = function clickEvent(e) {
+            new Audio("sounds/meditakesound.mp3").play();
+
             console.log("onMediKidClick")
             x.parentNode.removeChild(x);
             health.value = 100;

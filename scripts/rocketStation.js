@@ -1,5 +1,5 @@
 const highScoresList = document.getElementById("highScoresList");
-const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+//const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 localStorage.setItem('rasp', false)
 
 // Firebase configuration
@@ -22,33 +22,29 @@ function stopCount() {
   endDate = Date.now();
   timer_is_on = false;
 
-  var diffMs = (Christmas - today); // milliseconds between now & Christmas
-  var diffDays = Math.floor(diffMs / 86400000); // days
-  var diffHrs = Math.floor((diffMs % 86400000) / 3600000); // hours
-  var diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000); // minutes
+  var diffInMilliSeconds = (endDate - localStorage.getItem("startDate")); // milliseconds between now & Christmas
 
-  document.getElementById("userTime").innerHTML = ("Playtime: " + playerTime);
+  var printPlayTimeString = millisToMinutesAndSeconds(diffInMilliSeconds)
 
-  addHighScoresEntry(gameTimePrint);
-  writeUserGameTimeToHighScoreFirebaseDatabase(playerTime);
+  document.getElementById("userTime").innerHTML = ("Playtime: " + printPlayTimeString);
+
+  //addHighScoresEntry(gameTimePrint);
+  writeUserGameTimeToHighScoreFirebaseDatabase(diffInMilliSeconds);
 }
 
-// Add the score from User to Highscores List
-function addHighScoresEntry(time) {
-  var username = localStorage.getItem("username");
-  console.log(username);
-  var highScoresEntry = {
-    name: username,
-    score: time
-  }
+function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
 
-  var existingHighScores = JSON.parse(localStorage.getItem("highScores"));
-  console.log(existingHighScores);
-  if (existingHighScores == null) existingHighScores = [];
-
-  localStorage.setItem("highScoresEntry", JSON.stringify(highScoresEntry))
-  existingHighScores.push(highScoresEntry);
-  localStorage.setItem("highScores", JSON.stringify(existingHighScores))
+function writeUserGameTimeToHighScoreFirebaseDatabase(time) {
+  database.collection('highscores').add(
+    {
+      username: localStorage.getItem("username"),
+      time: time
+    }
+  )
 }
 
 document.getElementById("userDeaths").innerHTML = ("Deaths: " + localStorage.getItem("deaths"));
@@ -56,18 +52,50 @@ document.getElementById("userLifes").innerHTML = ("Lifes: " + localStorage.getIt
 document.getElementById("userJumps").innerHTML = ("Jumps: " + localStorage.getItem("jumps"));
 document.getElementById("userHits").innerHTML = ("Hits: " + localStorage.getItem("hits"));
 
+// Print highscores from Firebase
+getHighScoresFromFirebase();
 
-highScoresList.innerHTML = highScores
-  .map(highScore => {
-    return '<li class="high-score">' + highScore.name + '   -   ' + highScore.score + '</li>';
-  }).join('');
-
-
-function writeUserGameTimeToHighScoreFirebaseDatabase(time) {
-  firebase.database().ref('highscores').set(
-    {
-      username: localStorage.getItem(username),
-      time: time
-    }
+// get the highscores from Firebase and print the 5 best times on Document
+async function getHighScoresFromFirebase() {
+  const snapshot = await firebase.firestore().collection('highscores').orderBy("time").limit(5).get()
+  var highScoresMap = new Map();
+  snapshot.docs.map(nameScore =>
+    highScoresMap.set(nameScore.data().time, nameScore.data().username)
   )
+  console.log(highScoresMap)
+  var highScoresString = "";
+  
+  highScoresMap
+    .forEach((username, score) => {
+      console.log(username);
+      highScoresString += '<li class="high-score">' + username + '   -   ' + score + '</li>';
+    });
+  console.log(highScoresString)
+  highScoresList.innerHTML = highScoresString;
 }
+
+// var highScoresListFromFirebase = await getHighScoresFromFirebase();
+// console.log(highScoresListFromFirebase)
+
+// highScoresList.innerHTML = highScores
+//   .map(highScore => {
+//     return '<li class="high-score">' + highScore.name + '   -   ' + highScore.score + '</li>';
+//   }).join('');
+
+// Add the score from User to Highscores List
+// function addHighScoresEntry(time) {
+//   var username = localStorage.getItem("username");
+//   console.log(username);
+//   var highScoresEntry = {
+//     name: username,
+//     score: time
+//   }
+
+//   var existingHighScores = JSON.parse(localStorage.getItem("highScores"));
+//   console.log(existingHighScores);
+//   if (existingHighScores == null) existingHighScores = [];
+
+//   localStorage.setItem("highScoresEntry", JSON.stringify(highScoresEntry))
+//   existingHighScores.push(highScoresEntry);
+//   localStorage.setItem("highScores", JSON.stringify(existingHighScores))
+// }

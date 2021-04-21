@@ -43,6 +43,7 @@ var healthdec = setInterval(function () {
         localStorageDeaths += 1;
         localStorage.removeItem("deaths");
         localStorage.setItem("deaths", localStorageDeaths);
+
         let alterString = 'Game over \nYou reached ' + points + ' points'
         if (window.confirm(alterString)) {
             window.location.href = 'index.html';
@@ -70,9 +71,15 @@ function showMedikit() {
     document.getElementById('medikitImg').style.marginRight = "auto";
     document.getElementById('medikitImg').style.bottom = "500px"
     document.getElementById('medikitImg').onclick = function clickEvent(e) {
+        new Audio("sounds/meditakesound.mp3").play();
+
         console.log("onMediKidClick")
         x.parentNode.removeChild(x);
-        health.value = 100;
+        health.value+=10;
+        var localStoragehealth = parseInt(localStorage.getItem("health"));
+        localStorage.removeItem("health")
+        localStoragehealth += 10;
+        localStorage.setItem("health", localStoragehealth);
     };
 }
 
