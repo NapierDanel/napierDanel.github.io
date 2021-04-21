@@ -4,17 +4,12 @@ var gameOver = 0
 var health = 100
 var time = 0
 var roomsEntered = 0
-
 var startDate;
 var endDate;
-
-
-
 var c = 0;
 var t;
 var timer_is_on = false;
 var time = 0;
-
 
 
 // Player -----------------------------------------------------------------
@@ -24,16 +19,21 @@ function generatePlayer(inputName) {
         "name": inputName,
         "lifes": 100,
         "tools": [],
-
-
     }
 }
 
+
 // Cookies ----------------------------------------------------------------
 
+document.cookie = "user, initTime";
+
+var x = document.cookie;
+
+console.log(x);
 
 
 // Ghosts ----------------------------------------------------------------
+
 var roomGhost =
 {
     "id": 0,
@@ -50,8 +50,8 @@ var roomGhost =
     ]
 };
 
-// ISS Api ----------------------------------------------------------------
 
+// ISS Api ----------------------------------------------------------------
 
 async function getISS() {
 
@@ -66,15 +66,10 @@ async function getISS() {
     console.log(longitude);
 }
 
-
 //getISS();
 
-// SpaceX Api ----------------------------------------------------------------
 
-    const issUrl = ("https://api.wheretheiss.at/v1/satellites/25544");
-    const response = await fetch(issUrl);
-    const data = await response.json();
-    console.log(data);
+// SpaceX Api ----------------------------------------------------------------
 
 async function getAllSpaceXMissions() {
 
@@ -88,12 +83,10 @@ async function getAllSpaceXMissions() {
     console.log(mission_name);
     console.log(payload_ids);
 }
-
-
 //getAllSpaceXMissions();
 
-// Ghost Api ----------------------------------------------------------------
 
+// Ghost Api ----------------------------------------------------------------
 
 let ghostApiUrl = "https://ghost-api-game.herokuapp.com/ghosts";
 var ghostApiResponseObject;
@@ -115,28 +108,21 @@ getGhosts().then(
 
 console.log("ghostApiResponseObject: " + ghostApiResponseObject)
 
-console.log("Ghosts");
-console.group();
-console.log("Level 2");
-console.group();
-console.log("Level 3");
-console.warn("More of level 3");
-console.groupEnd();
-console.log("Back to level 2");
-console.groupEnd();
-console.log("Back to the outer level")
+function logLevel() {
+    console.log("Ghosts");
+    console.group();
+    console.log("Level 2");
+    console.group();
+    console.log("Level 3");
+    console.warn("More of level 3");
+    console.groupEnd();
+    console.log("Back to level 2");
+    console.groupEnd();
+    console.log("Back to the outer level")
+}
 
 
-
-
-
-document.cookie = "user, initTime";
-
-
-var x = document.cookie;
-
-console.log(x);
-
+// Start ----------------------------------------------------------------
 // Start new Game and go to index
 function startGame() {
     let inputName = document.getElementById("nameInput").value;
@@ -153,7 +139,7 @@ function startGame() {
 function setItems() {
     // Init Statistics
     localStorage.setItem("startDate", startDate);
-    localStorage.setItem("lifes", 100);
+    localStorage.setItem("health", 100);
     localStorage.setItem("deaths", 0);
     localStorage.setItem("jumps", 0);
     localStorage.setItem("hits", 0);

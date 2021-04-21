@@ -5,10 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Lifes
     let health = document.getElementById("health")
-
-    const lifeObjects = document.querySelector('lifes')
-    var lifes = 5
-
     const character = document.querySelector('.character')
     const campfire = document.querySelector('.campfire')
     const game = document.querySelector('.game')
@@ -182,6 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     localStorageDeaths += 1;
                     localStorage.removeItem("deaths");
                     localStorage.setItem("deaths", localStorageDeaths);
+                    isGameOver = true;
                     //remove all childs
                     while (game.firstChild) {
                         game.removeChild(game.lastChild)
@@ -214,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         }
 
-        if (points >= 500) {
+        if (points >= 200) {
             window.location.replace('forest.html')
         }
 

@@ -16,7 +16,7 @@
     <map name="kitchenmap">
         <area shape="rect" coords="801,323,877,418" alt="knifeblock" onclick="foundKnife(event)">
         <area shape="rect" coords="206,315,320,410" alt="apple" onclick="foundApple(event)">
-        <area shape="rect" coords="510,391,722,659" alt="lighter" onclick="foundLighter(event)" >
+        <area shape="rect" coords="510,391,722,659" alt="lighter" onclick="foundLighter(event)">
 
     </map>
 
@@ -43,7 +43,9 @@
 
     var myImg = document.getElementById("kitchenPicture");
     myImg.onmousedown = GetCoordinates;
-
+    var itemfoundKnife = false;
+    var itemfoundApple = false;
+    var itemfoundFire = false;
 
     $("img").click(function () {
         var x = $("p").position();
@@ -75,18 +77,34 @@
         document.getElementById("knifesound").play();
         document.getElementById("knife").style.display = "block";
         document.getElementById("tracesText").innerHTML = "You found a knife with blood on it, this could be the murderweapon";
+        itemfoundKnife = true;
+        allFoundShowDialog()
     }
 
     function foundApple(evm) {
         document.getElementById("knifesound").play();
         document.getElementById("apple").style.display = "block";
         document.getElementById("tracesText").innerHTML = "You found an apple with blood on it, this could be the murderweapon";
+        itemfoundApple = true;
+        allFoundShowDialog()
     }
 
     function foundLighter(evm) {
         document.getElementById("lightersound").play();
         document.getElementById("firemaker").style.display = "block";
         document.getElementById("tracesText").innerHTML = "You found an lighter with blood on it, this could be the murderweapon";
+        itemfoundFire = true;
+        allFoundShowDialog()
+    }
+
+    function allFoundShowDialog(){
+        console.log(itemfoundKnife)
+        if (itemfoundKnife && itemfoundApple && itemfoundFire) {
+            check = window.confirm("Ohh wait.. I'm not looking for a morder O__o \nI have to find the labor of Konrad Zuse\nlets go back  ¯\\_(ツ)_/¯");
+            if (check == true) {
+                location = "/houseCrimeScene.html";
+            }
+        }
     }
 
     function dropLighter(ev) {

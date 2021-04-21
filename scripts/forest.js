@@ -1,16 +1,25 @@
-function addElement() {
-   document.body.style.background = backgroundImage
-}
+document.body.style.backgroundImage = "url('../pictures/forest.jpg')";
+var health = parseInt(localStorage.getItem('health'));
+console.log(health)
 
-document.body.onload = addElement;
+var heightString = window.innerHeight-300 + "px"
 
-function addElement() {
-   var newDiv = document.createElement("div");
-   var backgroundImage = document.createElement('img', "style.background: 100%");
+document.getElementById("container").style.height = heightString;
 
-   backgroundImage.src = '../pictures/forest-1072828_1920.jpg'
-   newDiv.appendChild(backgroundImage);
+$(document).on('click','#medikit1',function(){
+  $('#img').remove();
+  takeMedikit();
+});
+$(document).on('click','#medikit2',function(){
+   $('#img').remove();
+   takeMedikit();
+ });
+ $(document).on('click','#medikit3',function(){
+   $('#img').remove();
+   takeMedikit();
+ });
 
-   var currentDiv = document.getElementById("div1");
-   document.body.insertBefore(newDiv, currentDiv);
-}
+ function takeMedikit(){
+   health+=10;
+
+ }

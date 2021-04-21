@@ -1,7 +1,7 @@
 var context = new (window.AudioContext || window.webkitAudioContext)();
 let health = document.getElementById("health")
 var zoomGhostDeath = false;
-
+health.value = parseInt(localStorage.getItem("health"));
 
 // var oscollator = context.createOscillator();
 // h = window.innerHeight;
@@ -20,18 +20,33 @@ var healthdec = setInterval(function () {
         clearInterval(healthdec);
         showMedikit();
     }
-    health.value -= 10;
+
+    // Save hit
     var hits = parseInt(localStorage.getItem("hits"));
     localStorage.removeItem("hits")
     hits += 10;
     console.log("hit")
     localStorage.setItem("hits", hits);
-    if (health.value == 0) {
+
+    // Save health
+    health.value -= 10;
+    var localStoragehealth = parseInt(localStorage.getItem("health"));
+    localStorage.removeItem("health")
+    localStoragehealth -= 10;
+    localStorage.setItem("health", localStoragehealth);
+
+    console.log(localStoragehealth)
+
+    if (localStoragehealth === 0) {
+        clearInterval(healthdec)
         var localStorageDeaths = parseInt(localStorage.getItem("deaths"));
         localStorageDeaths += 1;
         localStorage.removeItem("deaths");
         localStorage.setItem("deaths", localStorageDeaths);
-
+        let alterString = 'Game over \nYou reached ' + points + ' points'
+        if (window.confirm(alterString)) {
+            window.location.href = 'index.html';
+        };
     }
 }, 2000);
 
