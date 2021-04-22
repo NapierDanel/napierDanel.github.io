@@ -12,8 +12,21 @@ $("#grids").click(function () {
     if (counter == 10) {
         location.href = 'labor.html';
     }
+    //background-image: linear-gradient(to right, grey 20px, transparent 1px, transparent);
+    // width: 100%;
+    // height: 700px;
+    // background-color: aqua;
+    // background-size: 50px 700px;
+    // background-repeat: repeat-x;
+    // background-image: linear-gradient(to right, grey 20px, transparent 1px, transparent);
+    // background-position: left 30px top, left 5px bottom, left 5px center;
+
+
     audio.play();
-    $("#grids").css("background-image", "linear-gradient(to right, red 20px, transparent 1px, transparent);")
+    $("#grids").css("background-repeat", "repeat-x")
+    $("#grids").css("background-image", "linear-gradient(to right, grey " + (10 - counter) + "px, transparent 1px, transparent)")
+    $("#grids").css("background-size", "50px 700px")
+
     counter++;
 });
 

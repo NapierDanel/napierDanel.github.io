@@ -80,10 +80,29 @@ async function getAllSpaceXMissions() {
 
     // get lat lon into const variables
     const { mission_name, payload_ids } = data;
-    console.log(mission_name);
-    console.log(payload_ids);
+    console.log("Mission Name: " + data[0].mission_name);
+    console.log("Payload Ids: " + data[0].payload_ids);
 }
 //getAllSpaceXMissions();
+
+async function getNextSpaceXMission() {
+
+    const spacexUrl = "https://api.spacexdata.com/v3/launches/next";
+    const response = await fetch(spacexUrl);
+    const data = await response.json();
+    console.log(data);
+
+    // get lat lon into const variables
+    const { mission_name, launch_date_local } = data;
+    console.log("Mission Name: " + mission_name);
+    console.log("Launch_date_unix: " + launch_date_local);
+
+    document.getElementById("missionName").innerHTML = "Name: " + mission_name;
+    document.getElementById("missionTime").innerHTML = "Time: " + launch_date_local;
+
+}
+
+getNextSpaceXMission();
 
 
 // Ghost Api ----------------------------------------------------------------
@@ -144,6 +163,7 @@ function setItems() {
     localStorage.setItem("jumps", 0);
     localStorage.setItem("hits", 0);
     localStorage.setItem("beats", 0);
+    localStorage.setItem("secretKey", false);
 
     console.log(localStorage.getItem("startDate"));
     console.log(localStorage.getItem("lifes"));

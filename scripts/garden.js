@@ -4,10 +4,9 @@ document.getElementById("trimmer").play();
 document.getElementById("smile").play();
 var haveSecretKey = localStorage.getItem("secretKey");
 console.log("have secret key: " + haveSecretKey);
-
 // Show the crosshair to the rocketStation if the user got the secret key
-if (haveSecretKey) {
-    console.log("True")
+if (haveSecretKey === "true") {
+    console.log(haveSecretKey);
     var crosshairImage = document.createElement("img");
     crosshairImage.src = '../pictures/redCircle.png';
     document.getElementById("crosshair").appendChild(crosshairImage);
@@ -68,9 +67,7 @@ if (haveSecretKey) {
 
         };
         canvas.appendChild(node);
-
     };
-
 
 
     var iterations = 0;

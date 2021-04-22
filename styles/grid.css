@@ -4,16 +4,16 @@
     background-color: aqua;
     background-size: 50px 700px;
     background-repeat: repeat-x;
-    background-image: linear-gradient(to right, grey 20px, transparent 1px, transparent);
+    background-image: linear-gradient(to right, grey 15px, transparent 1px, transparent);
     background-position: left 30px top, left 5px bottom, left 5px center;
     cursor: url('../pictures/rasp.cur'), auto;	
 
 }
 
 html {
-    background-color: black;
+    background-color: grey;
 }
 
 h1 {
-    color: red;
+    color: rgb(0, 0, 0);
 }

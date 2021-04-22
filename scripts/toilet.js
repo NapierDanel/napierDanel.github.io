@@ -17,7 +17,7 @@ function printMousePos(e) {
 }
 
 function showRaspText(){
-    document.getElementById('raspHintText').innerHTML = "You found a Rasp, what can you do with it? Maybe somewhere is a secret Door";
+    document.getElementById('raspHintText').innerHTML = "You found a Rasp, what can you do with it? Maybe somewhere is a secret Door. Tipp: :) ES";
 }
 
 $( function() {

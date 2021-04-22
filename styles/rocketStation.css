@@ -26,6 +26,13 @@ h1 {
     color: greenyellow;
 }
 
+#missionName {
+    color: greenyellow;
+}
+
+#missionTime {
+    color: greenyellow;
+}
 #lottieRocket {
     float: left;
 }

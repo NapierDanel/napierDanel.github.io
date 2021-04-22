@@ -22,8 +22,7 @@ function stopCount() {
   endDate = Date.now();
   timer_is_on = false;
 
-  var diffInMilliSeconds = (endDate - localStorage.getItem("startDate")); // milliseconds between now & Christmas
-
+  var diffInMilliSeconds = (endDate - localStorage.getItem("startDate")); 
   var printPlayTimeString = millisToMinutesAndSeconds(diffInMilliSeconds)
 
   document.getElementById("userTime").innerHTML = ("Playtime: " + printPlayTimeString);
@@ -64,7 +63,7 @@ async function getHighScoresFromFirebase() {
   )
   console.log(highScoresMap)
   var highScoresString = "";
-  
+
   highScoresMap
     .forEach((username, score) => {
       console.log(username);
